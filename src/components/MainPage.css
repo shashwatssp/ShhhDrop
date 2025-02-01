@@ -1,0 +1,152 @@
+/* MainPage.css */
+
+/* Global styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .main-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    height: 90vh; /* Limit height to the viewport height */
+  }
+  
+  h1, h2 {
+    text-align: center;
+    color: #333;
+    font-size: 22px; /* Adjusted font size for better fit */
+    word-wrap: break-word;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px auto;
+    display: block;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  .signout-btn {
+    background-color: #f44336;
+  }
+  
+  .signout-btn:hover {
+    background-color: #e53935;
+  }
+  
+  /* Messages Section */
+  .messages-section {
+    margin-bottom: 20px;
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto; /* Scrollable messages */
+  }
+  
+  .messages-list {
+    margin-top: 10px;
+  }
+  
+  .message-bubble {
+    background-color: #e2f7f2;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    word-wrap: break-word;
+  }
+  
+  .no-messages {
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+  }
+  
+  /* User Link Section */
+  .user-link-section {
+    margin-top: 20px;
+  }
+  
+  .link-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .link-visible {
+    width: 100%;
+    padding: 12px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+    word-wrap: break-word;
+    text-align: center;
+  }
+  
+  .copy-btn {
+    background-color: #2196F3;
+  }
+  
+  .copy-btn:hover {
+    background-color: #0b79d4;
+  }
+  
+  /* Show More Button */
+  .show-more-btn {
+    background-color: #2196F3;
+    margin-top: 10px;
+  }
+  
+  .show-more-btn:hover {
+    background-color: #0b79d4;
+  }
+  
+  /* Responsiveness */
+  @media (max-width: 600px) {
+    .main-container {
+      padding: 50px 20px;
+      margin: 20px;
+      height: auto; /* Allow auto height for small screens */
+    }
+  
+    h1, h2 {
+      font-size: 20px;
+    }
+  
+    .message-bubble {
+      font-size: 13px;
+      padding: 10px;
+    }
+  
+    .link-visible {
+      font-size: 13px;
+    }
+  
+    .copy-btn {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  
+    .signout-btn {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  }
+  
