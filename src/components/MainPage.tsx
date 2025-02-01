@@ -10,6 +10,7 @@ const MainPage: React.FC = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [visibleMessages, setVisibleMessages] = useState<string[]>([]);
   const [showMore, setShowMore] = useState(false);
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,6 +42,7 @@ const MainPage: React.FC = () => {
 
   const handleShowMore = () => {
     setVisibleMessages(messages);
+    console.log(showMore);
     setShowMore(false);
   };
 

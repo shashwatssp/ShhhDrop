@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { auth, provider, signInWithPopup, db } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore"; // Import Firestore functions
@@ -15,7 +15,7 @@ const generateShortUID = () => {
 };
 
 const HomePage: React.FC = () => {
-  const [messages, setMessages] = useState(0);
+  const messages = 17;
   const navigate = useNavigate();
 
   const handleGoogleSignIn = async () => {

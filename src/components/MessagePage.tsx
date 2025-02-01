@@ -6,6 +6,7 @@ import "./MessagePage.css";
 
 const MessagePage: React.FC = () => {
   const [message, setMessage] = useState("");
+  // @ts-ignore
   const [messages, setMessages] = useState<string[]>([]);
   const [error, setError] = useState<string>("");
   const { link } = useParams();
