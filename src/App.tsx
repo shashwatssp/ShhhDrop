@@ -1,40 +1,54 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
-import { auth } from "./firebaseConfig"; // Import firebase auth
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { auth } from "./firebaseConfig";
 import HomePage from "./components/HomePage";
 import MainPage from "./components/MainPage";
-import MessagePage from "./components/MessagePage"; // Corrected route
+import MessagePage from "./components/MessagePage";
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [userId, setUserId] = useState<string | null>(localStorage.getItem("userId"));
 
   useEffect(() => {
+    if (userId) {
+      setIsAuthenticated(true);
+      setLoading(false);
+      return; // Skip Firebase check if cached
+    }
+
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setIsAuthenticated(true);
-        // Redirect to the main page if signed in
-        if (window.location.pathname === "/") {
-          navigate(`/main?link=${user.uid}`);
-        }
+        setUserId(user.uid);
+        localStorage.setItem("userId", user.uid); // Store in localStorage
       } else {
         setIsAuthenticated(false);
-        // Redirect to home if not signed in
-        if (window.location.pathname !== "/") {
-          navigate("/");
-        }
+        setUserId(null);
+        localStorage.removeItem("userId"); // Clear on logout
       }
+      setLoading(false);
     });
 
     return unsubscribe;
-  }, [navigate]);
+  }, [userId]);
+
+  if (loading) {
+    return <div>Loading...</div>; // Optional loading UI
+  }
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/main" element={isAuthenticated ? <MainPage /> : <HomePage />} />
-        <Route path="/:link" element={<MessagePage />} />
+        <Route 
+          path="/" 
+          element={isAuthenticated ? <Navigate to="/main" /> : <HomePage />} 
+        />
+        <Route 
+          path="/main" 
+          element={isAuthenticated ? <MainPage /> : <Navigate to="/" />} 
+        />
+        <Route path="/:link" element={<MessagePage/>} />
       </Routes>
     </Router>
   );
