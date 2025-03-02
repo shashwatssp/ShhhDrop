@@ -1,84 +1,117 @@
 /* src/components/HomePage.css */
 
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap');
+
+:root {
+  --apple-bg: #ffffff;
+  --apple-surface: #f5f5f7;
+  --apple-text: #1d1d1f;
+  --apple-secondary-text: #86868b;
+  --apple-blue: #0071e3;
+  --apple-blue-hover: #0077ed;
+  --apple-border: #d2d2d7;
+  --apple-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --apple-radius: 12px;
+}
+
 /* Global Styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-  }
-  
-  body {
-    background-color: #f7f7f7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  /* Home Page Container */
-  .home-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  background-color: var(--apple-bg);
+  color: var(--apple-text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Home Page Container */
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 2rem;
+}
+
+/* Centering Content */
+.home-content {
+  text-align: center;
+  background-color: var(--apple-surface);
+  padding: 3rem;
+  border-radius: var(--apple-radius);
+  box-shadow: var(--apple-shadow);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Title */
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--apple-text);
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+}
+
+/* Tagline */
+.tagline {
+  font-size: 1.125rem;
+  color: var(--apple-secondary-text);
+  margin-bottom: 2rem;
+}
+
+/* Google Sign-In Button */
+.google-signin-btn {
+  background-color: var(--apple-blue);
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  border: none;
+  border-radius: var(--apple-radius);
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.google-signin-btn:hover {
+  background-color: var(--apple-blue-hover);
+}
+
+/* Message Count Text */
+.message-count {
+  font-size: 1rem;
+  color: var(--apple-secondary-text);
+}
+
+/* Error Message */
+.error-message {
+  color: var(--apple-blue);
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .home-content {
     padding: 2rem;
   }
-  
-  /* Centering Content */
-  .home-content {
-    text-align: center;
-    background-color: white;
-    padding: 3rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-  }
-  
-  /* Title */
   .title {
-    font-size: 2.5rem;
-    color: #2d2d2d;
-    font-weight: bold;
-    margin-bottom: 1rem;
+    font-size: 1.75rem;
   }
-  
-  /* Tagline */
   .tagline {
-    font-size: 1.25rem;
-    color: #777;
-    margin-bottom: 2rem;
-  }
-  
-  /* Google Sign-In Button */
-  .google-signin-btn {
-    background-color: #4285f4;
-    color: white;
-    padding: 1rem 2rem;
-    font-size: 1.125rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom: 2rem;
-    transition: background-color 0.3s ease;
-  }
-  
-  .google-signin-btn:hover {
-    background-color: #3367d6;
-  }
-  
-  /* Message Count Text */
-  .message-count {
     font-size: 1rem;
-    color: #555;
   }
-
-  .error-message {
-    color: red;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
+  .google-signin-btn {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
   }
-  
+}

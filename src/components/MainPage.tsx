@@ -3,7 +3,8 @@ import { auth, db } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { signOut, onAuthStateChanged } from "firebase/auth";
-import { Copy, Share, LogOut, MessageSquare } from "lucide-react";
+import { Copy, Share2, LogOut, MessageSquare } from "lucide-react";
+import "./MainPage.css";
 
 const MainPage: React.FC = () => {
   const [userLink, setUserLink] = useState<string | null>(null);
@@ -50,9 +51,9 @@ const MainPage: React.FC = () => {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      localStorage.removeItem("userId"); // Ensure user data is cleared
-      navigate("/", { replace: true }); // Redirect to home page
-      window.location.reload(); // Force a fresh login session
+      localStorage.removeItem("userIdToken");
+      navigate("/", { replace: true });
+      window.location.reload();
     } catch (error) {
       console.error("Logout failed:", error);
     }
@@ -62,8 +63,7 @@ const MainPage: React.FC = () => {
     if (!userLink) return;
   
     const fullLink = `${window.location.origin}/${userLink}`;
-    console.log(fullLink);
-  
+    
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(fullLink);
@@ -88,77 +88,67 @@ const MainPage: React.FC = () => {
   };
 
   if (loading) {
-    return <div className="text-white text-center mt-10">Loading...</div>;
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-black px-6 py-10 text-white">
-      {/* Floating Logout Button */}
-      <button
-        onClick={handleSignOut}
-        className="absolute top-6 right-6 flex items-center text-gray-500 hover:text-white transition-opacity"
-        aria-label="Sign out"
-      >
-        <LogOut className="h-5 w-5 mr-2" />
-        <span className="font-semibold">Logout</span>
-      </button>
+    <div className="apple-container">
+      <header className="apple-header">
+        <h1 className="brand-name">ShhhDrop</h1>
+        <button onClick={handleSignOut} className="logout-button" aria-label="Sign out">
+          <LogOut className="icon" />
+          <span>Logout</span>
+        </button>
+      </header>
 
-      {/* Share Link Section */}
-      <div className="w-full max-w-md mb-10">
-        <div className="flex items-center mb-3">
-          <Share className="h-5 w-5 text-gray-400 mr-2" />
-          <h2 className="text-lg font-semibold">Share Your Link</h2>
+      <section className="share-section">
+        <div className="section-title">
+          <Share2 className="icon" />
+          <h2>Share Your Link</h2>
         </div>
 
         {userLink && (
-          <div className="flex items-center bg-gray-800 rounded-lg overflow-hidden shadow-md">
-            <div className="flex-1 px-4 py-3 text-gray-300 font-mono text-sm truncate">
-              {`${window.location.origin}/${userLink}`}
-            </div>
-            <button
-              className={`px-5 py-3 font-medium transition ${
-                copying ? "bg-gray-600 text-gray-300" : "bg-gray-700 hover:bg-gray-500"
-              }`}
+          <div className="link-container">
+            <p className="link-text">{`${window.location.origin}/${userLink}`}</p>
+            <button 
+              className={`copy-button ${copying ? 'copied' : ''}`} 
               onClick={copyLinkToClipboard}
             >
-              {copying ? "Copied!" : <Copy className="w-4 h-4" />}
+              {copying ? "Copied" : <Copy className="icon" />}
             </button>
           </div>
         )}
-      </div>
+      </section>
 
-      {/* Messages Section */}
-      <div className="w-full max-w-md">
-        <div className="flex items-center mb-3">
-          <MessageSquare className="h-5 w-5 text-gray-400 mr-2" />
-          <h2 className="text-lg font-semibold">Messages</h2>
-          <span className="ml-2 text-sm text-gray-400">{messages.length}</span>
+      <section className="messages-section">
+        <div className="section-title">
+          <MessageSquare className="icon" />
+          <h2>Messages</h2>
+          <span className="message-count">{messages.length}</span>
         </div>
 
-        <div className="space-y-3">
+        <div className="messages-list">
           {visibleMessages.length > 0 ? (
             visibleMessages.map((msg, index) => (
-              <div
-                key={index}
-                className="bg-gray-800 rounded-lg px-5 py-3 text-gray-100 text-base leading-relaxed shadow"
-              >
+              <div key={index} className="message-bubble">
                 {msg}
               </div>
             ))
           ) : (
-            <p className="text-center py-6 text-gray-500 text-base font-light">No messages yet</p>
+            <p className="no-messages">No messages yet</p>
           )}
         </div>
 
         {messages.length > visibleMessages.length && (
-          <button
-            className="mt-6 text-sm text-gray-400 hover:text-white transition"
-            onClick={handleShowMore}
-          >
-            Show more messages
+          <button className="show-more-button" onClick={handleShowMore}>
+            Show More
           </button>
         )}
-      </div>
+      </section>
     </div>
   );
 };

@@ -8,10 +8,10 @@ import MessagePage from "./components/MessagePage";
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const [userId, setUserId] = useState<string | null>(localStorage.getItem("userId"));
+  const [userIdToken, setuserIdToken] = useState<string | null>(localStorage.getItem("userIdToken"));
 
   useEffect(() => {
-    if (userId) {
+    if (userIdToken) {
       setIsAuthenticated(true);
       setLoading(false);
       return; // Skip Firebase check if cached
@@ -20,18 +20,18 @@ const App: React.FC = () => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setIsAuthenticated(true);
-        setUserId(user.uid);
-        localStorage.setItem("userId", user.uid); // Store in localStorage
+        setuserIdToken(user.uid);
+        localStorage.setItem("userIdToken", user.uid); // Store in localStorage
       } else {
         setIsAuthenticated(false);
-        setUserId(null);
-        localStorage.removeItem("userId"); // Clear on logout
+        setuserIdToken(null);
+        localStorage.removeItem("userIdToken"); // Clear on logout
       }
       setLoading(false);
     });
 
     return unsubscribe;
-  }, [userId]);
+  }, [userIdToken]);
 
   if (loading) {
     return <div>Loading...</div>; // Optional loading UI

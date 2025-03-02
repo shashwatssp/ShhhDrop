@@ -1,152 +1,307 @@
-/* MainPage.css */
+/* Apple-inspired MainPage.css */
 
-/* Global styles */
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap');
+
+:root {
+  --apple-bg: #ffffff;
+  --apple-surface: #f5f5f7;
+  --apple-text: #1d1d1f;
+  --apple-secondary-text: #86868b;
+  --apple-blue: #0071e3;
+  --apple-blue-hover: #0077ed;
+  --apple-danger: #ff3b30;
+  --apple-border: #d2d2d7;
+  --apple-surface-hover: #e8e8ed;
+  --apple-message-bg: #f5f5f7;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f7f7f7;
-    margin: 0;
-    padding: 0;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--apple-bg);
+  color: var(--apple-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+.apple-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.apple-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0 2rem;
+  border-bottom: 1px solid var(--apple-border);
+  margin-bottom: 2rem;
+}
+
+.apple-header h1 {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.signout-button {
+  background: none;
+  border: none;
+  color: var(--apple-blue);
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s ease;
+}
+
+.signout-button:hover {
+  opacity: 0.8;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  font-weight: 500;
+}
+
+.section-title h2 {
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 0.75rem;
+}
+
+.section-title .icon {
+  color: var(--apple-secondary-text);
+}
+
+.message-count {
+  margin-left: 0.5rem;
+  color: var(--apple-secondary-text);
+  font-size: 16px;
+}
+
+.share-section {
+  margin-bottom: 2.5rem;
+}
+
+.link-container {
+  display: flex;
+  background-color: var(--apple-surface);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.link-text {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  font-family: monospace;
+  font-size: 14px;
+  color: var(--apple-secondary-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copy-button {
+  background-color: var(--apple-surface);
+  border: none;
+  border-left: 1px solid var(--apple-border);
+  color: var(--apple-blue);
+  font-weight: 500;
+  padding: 0 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-button:hover {
+  background-color: var(--apple-surface-hover);
+}
+
+.copy-button.copied {
+  color: var(--apple-secondary-text);
+}
+
+.messages-section {
+  flex: 1;
+}
+
+.messages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.message-bubble {
+  background-color: var(--apple-message-bg);
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  font-size: 15px;
+  line-height: 1.5;
+  transition: transform 0.2s ease;
+}
+
+.message-bubble:hover {
+  transform: translateY(-2px);
+}
+
+.no-messages {
+  text-align: center;
+  color: var(--apple-secondary-text);
+  padding: 2rem 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.show-more-button {
+  background-color: transparent;
+  color: var(--apple-blue);
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  margin: 0;
+  text-align: left;
+}
+
+.show-more-button:hover {
+  opacity: 0.8;
+}
+
+/* Loading spinner */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--apple-blue);
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --apple-bg: #000000;
+    --apple-surface: #1c1c1e;
+    --apple-text: #f5f5f7;
+    --apple-secondary-text: #86868b;
+    --apple-blue: #0a84ff;
+    --apple-blue-hover: #409cff;
+    --apple-border: #38383a;
+    --apple-surface-hover: #2c2c2e;
+    --apple-message-bg: #1c1c1e;
   }
   
-  .main-container {
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 40px 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow-y: auto; /* Allow scrolling if content overflows */
-    height: 90vh; /* Limit height to the viewport height */
+  .loading-spinner {
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: var(--apple-blue);
+  }
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .apple-container {
+    padding: 1.5rem;
   }
   
-  h1, h2 {
-    text-align: center;
-    color: #333;
-    font-size: 22px; /* Adjusted font size for better fit */
-    word-wrap: break-word;
+  .apple-header h1 {
+    font-size: 26px;
   }
   
-  button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 10px auto;
-    display: block;
+  .section-title h2 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .apple-container {
+    padding: 1rem;
   }
   
-  button:hover {
-    background-color: #45a049;
+  .apple-header {
+    padding: 1rem 0 1.5rem;
+    margin-bottom: 1.5rem;
   }
   
-  .signout-btn {
-    background-color: #f44336;
+  .apple-header h1 {
+    font-size: 24px;
   }
   
-  .signout-btn:hover {
-    background-color: #e53935;
+  .link-text {
+    padding: 0.75rem 1rem;
+    font-size: 12px;
   }
   
-  /* Messages Section */
-  .messages-section {
-    margin-bottom: 20px;
-    padding: 10px;
-    max-height: 300px;
-    overflow-y: auto; /* Scrollable messages */
-  }
-  
-  .messages-list {
-    margin-top: 10px;
+  .copy-button {
+    padding: 0 1rem;
   }
   
   .message-bubble {
-    background-color: #e2f7f2;
-    padding: 12px;
-    border-radius: 10px;
-    margin-bottom: 10px;
+    padding: 0.75rem 1rem;
     font-size: 14px;
-    word-wrap: break-word;
+  }
+}
+
+/* Safari-specific optimizations */
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .link-container {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
   
-  .no-messages {
-    font-size: 16px;
-    color: #888;
-    text-align: center;
+  .message-bubble {
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+}
+
+/* iOS touch feedback */
+@media (hover: none) {
+  .copy-button:active,
+  .signout-button:active,
+  .show-more-button:active {
+    opacity: 0.6;
   }
   
-  /* User Link Section */
-  .user-link-section {
-    margin-top: 20px;
+  .message-bubble:active {
+    transform: scale(0.98);
   }
-  
-  .link-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .link-visible {
-    width: 100%;
-    padding: 12px;
-    background-color: #f1f1f1;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    color: #333;
-    word-wrap: break-word;
-    text-align: center;
-  }
-  
-  .copy-btn {
-    background-color: #2196F3;
-  }
-  
-  .copy-btn:hover {
-    background-color: #0b79d4;
-  }
-  
-  /* Show More Button */
-  .show-more-btn {
-    background-color: #2196F3;
-    margin-top: 10px;
-  }
-  
-  .show-more-btn:hover {
-    background-color: #0b79d4;
-  }
-  
-  /* Responsiveness */
-  @media (max-width: 600px) {
-    .main-container {
-      padding: 50px 20px;
-      margin: 20px;
-      height: auto; /* Allow auto height for small screens */
-    }
-  
-    h1, h2 {
-      font-size: 20px;
-    }
-  
-    .message-bubble {
-      font-size: 13px;
-      padding: 10px;
-    }
-  
-    .link-visible {
-      font-size: 13px;
-    }
-  
-    .copy-btn {
-      font-size: 14px;
-      padding: 8px 16px;
-    }
-  
-    .signout-btn {
-      font-size: 14px;
-      padding: 8px 16px;
-    }
-  }
-  
+}

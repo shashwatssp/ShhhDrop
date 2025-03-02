@@ -24,8 +24,8 @@ const MessagePage: React.FC = () => {
       }
 
       querySnapshot.forEach(async (doc) => {
-        const userId = doc.id;
-        const userMessagesSnapshot = await getDocs(collection(db, "users", userId, "messages"));
+        const userIdToken = doc.id;
+        const userMessagesSnapshot = await getDocs(collection(db, "users", userIdToken, "messages"));
 
         const fetchedMessages: string[] = [];
         userMessagesSnapshot.forEach((messageDoc) => {
@@ -52,8 +52,8 @@ const MessagePage: React.FC = () => {
     }
 
     querySnapshot.forEach(async (doc) => {
-      const userId = doc.id;
-      await addDoc(collection(db, "users", userId, "messages"), { text: message });
+      const userIdToken = doc.id;
+      await addDoc(collection(db, "users", userIdToken, "messages"), { text: message });
       setMessage("");
       setMessages((prev) => [...prev, message]); // Update state immediately
     });
@@ -61,7 +61,7 @@ const MessagePage: React.FC = () => {
 
   return (
     <div className="message-container">
-      <h1>Drop Your Message</h1>
+      <h2>Drop Your Message</h2>
 
       {error && <p className="error-message">{error}</p>}
 
