@@ -1,85 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { db } from "../firebaseConfig";
-import { useNavigate, useParams } from "react-router-dom";
-import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
+import React, { useState } from "react";
 import "./MessagePage.css";
 
 const MessagePage: React.FC = () => {
   const [message, setMessage] = useState("");
-  // @ts-ignore
-  const [messages, setMessages] = useState<string[]>([]);
-  const [error, setError] = useState<string>("");
-  const { link } = useParams();
-  const navigate = useNavigate();
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  useEffect(() => {
-    const fetchMessages = async () => {
-      if (!link) return;
-      const q = query(collection(db, "users"), where("link", "==", link));
-      const querySnapshot = await getDocs(q);
+  const handleSendMessage = () => {
+    if (message.trim() === "") return;
 
-      if (querySnapshot.empty) {
-        setError("Invalid Link. Please check again.");
-        return;
-      }
+    // Simulate message sending
+    console.log("Message sent:", message);
 
-      querySnapshot.forEach(async (doc) => {
-        const userIdToken = doc.id;
-        const userMessagesSnapshot = await getDocs(collection(db, "users", userIdToken, "messages"));
+    // Show success message
+    setShowSuccess(true);
 
-        const fetchedMessages: string[] = [];
-        userMessagesSnapshot.forEach((messageDoc) => {
-          fetchedMessages.push(messageDoc.data().text);
-        });
+    // Clear input after sending
+    setMessage("");
 
-        setMessages(fetchedMessages);
-        setError("");
-      });
-    };
-
-    fetchMessages();
-  }, [link]);
-
-  const handleSendMessage = async () => {
-    if (!link || !message.trim()) return;
-
-    const q = query(collection(db, "users"), where("link", "==", link));
-    const querySnapshot = await getDocs(q);
-
-    if (querySnapshot.empty) {
-      setError("Invalid Link. Please check again.");
-      return;
-    }
-
-    querySnapshot.forEach(async (doc) => {
-      const userIdToken = doc.id;
-      await addDoc(collection(db, "users", userIdToken, "messages"), { text: message });
-      setMessage("");
-      setMessages((prev) => [...prev, message]); // Update state immediately
-    });
+    // Hide success message after 3 seconds
+    setTimeout(() => setShowSuccess(false), 3000);
   };
 
   return (
-    <div className="message-container">
-      <h2>Drop Your Message</h2>
-
-      {error && <p className="error-message">{error}</p>}
+    <div className="apple-container">
+      <h1 className="brand-name">ShhhDrop</h1>
 
       <textarea
+        className="message-input"
+        placeholder="Write your anonymous message..."
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        placeholder="Write your anonymous message..."
-        className="message-input"
       />
-      
+
       <div className="buttons">
-        <button onClick={handleSendMessage} className="send-btn">
+        <button className="send-btn" onClick={handleSendMessage}>
           Send Message
         </button>
-        <button onClick={() => navigate("/")} className="try-btn">
-          Try it Yourself
-        </button>
+        <button className="try-btn">Try It Yourself</button>
       </div>
+
+      {showSuccess && <p className="success-message">✅ Message sent!</p>}
     </div>
   );
 };

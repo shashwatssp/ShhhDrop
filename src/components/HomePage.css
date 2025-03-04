@@ -14,7 +14,6 @@
   --apple-radius: 12px;
 }
 
-/* Global Styles */
 * {
   margin: 0;
   padding: 0;
@@ -48,11 +47,11 @@ body {
   border-radius: var(--apple-radius);
   box-shadow: var(--apple-shadow);
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
 }
 
 /* Title */
-.title {
+.brand-name {
   font-size: 2rem;
   font-weight: 600;
   color: var(--apple-text);
@@ -69,15 +68,19 @@ body {
 
 /* Google Sign-In Button */
 .google-signin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   background-color: var(--apple-blue);
   color: white;
   padding: 1rem 2rem;
   font-size: 1.125rem;
+  font-weight: 500;
   border: none;
   border-radius: var(--apple-radius);
   cursor: pointer;
   width: 100%;
-  margin-bottom: 2rem;
   transition: background-color 0.3s ease;
 }
 
@@ -89,14 +92,7 @@ body {
 .message-count {
   font-size: 1rem;
   color: var(--apple-secondary-text);
-}
-
-/* Error Message */
-.error-message {
-  color: var(--apple-blue);
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  margin-top: 1.5rem;
 }
 
 /* Responsive Design */
@@ -104,7 +100,7 @@ body {
   .home-content {
     padding: 2rem;
   }
-  .title {
+  .brand-name {
     font-size: 1.75rem;
   }
   .tagline {

@@ -3,15 +3,19 @@ import { auth, db } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { signOut, onAuthStateChanged } from "firebase/auth";
-import { Copy, Share2, LogOut, MessageSquare } from "lucide-react";
+import { Copy, Share2, LogOut, MessageSquare, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 import "./MainPage.css";
 
 const MainPage: React.FC = () => {
   const [userLink, setUserLink] = useState<string | null>(null);
   const [messages, setMessages] = useState<string[]>([]);
-  const [visibleMessages, setVisibleMessages] = useState<string[]>([]);
   const [copying, setCopying] = useState(false);
   const [loading, setLoading] = useState(true);
+  
+  // Pagination state
+  const messagesPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const navigate = useNavigate();
 
@@ -34,7 +38,7 @@ const MainPage: React.FC = () => {
           const fetchedMessages: string[] = querySnapshot.docs.map((doc) => doc.data().text);
 
           setMessages(fetchedMessages);
-          setVisibleMessages(fetchedMessages.slice(0, 3));
+          setTotalPages(Math.ceil(fetchedMessages.length / messagesPerPage));
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -46,7 +50,34 @@ const MainPage: React.FC = () => {
     return () => unsubscribe();
   }, [navigate]);
 
-  const handleShowMore = () => setVisibleMessages(messages);
+  // Get current page messages
+  const getCurrentPageMessages = () => {
+    const startIndex = (currentPage - 1) * messagesPerPage;
+    const endIndex = startIndex + messagesPerPage;
+    return messages.slice(startIndex, endIndex);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+      // Scroll to top of messages section
+      const messagesSection = document.getElementById('messages-section');
+      if (messagesSection) {
+        messagesSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      // Scroll to top of messages section
+      const messagesSection = document.getElementById('messages-section');
+      if (messagesSection) {
+        messagesSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   const handleSignOut = async () => {
     try {
@@ -91,15 +122,18 @@ const MainPage: React.FC = () => {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
+        <p className="loading-text">Loading your messages...</p>
       </div>
     );
   }
+
+  const currentMessages = getCurrentPageMessages();
 
   return (
     <div className="apple-container">
       <header className="apple-header">
         <h1 className="brand-name">ShhhDrop</h1>
-        <button onClick={handleSignOut} className="logout-button" aria-label="Sign out">
+        <button onClick={handleSignOut} className="signout-button" aria-label="Sign out">
           <LogOut className="icon" />
           <span>Logout</span>
         </button>
@@ -109,6 +143,7 @@ const MainPage: React.FC = () => {
         <div className="section-title">
           <Share2 className="icon" />
           <h2>Share Your Link</h2>
+          <span className="section-subtitle">Share this link to receive anonymous messages</span>
         </div>
 
         {userLink && (
@@ -117,36 +152,79 @@ const MainPage: React.FC = () => {
             <button 
               className={`copy-button ${copying ? 'copied' : ''}`} 
               onClick={copyLinkToClipboard}
+              aria-label="Copy link"
             >
-              {copying ? "Copied" : <Copy className="icon" />}
+              {copying ? (
+                <>
+                  <CheckCircle2 className="icon" />
+                  <span className="copy-text">Copied</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="icon" />
+                  <span className="copy-text">Copy</span>
+                </>
+              )}
             </button>
           </div>
         )}
       </section>
 
-      <section className="messages-section">
+      <section id="messages-section" className="messages-section">
         <div className="section-title">
           <MessageSquare className="icon" />
-          <h2>Messages</h2>
+          <h2>Your Messages</h2>
           <span className="message-count">{messages.length}</span>
         </div>
 
-        <div className="messages-list">
-          {visibleMessages.length > 0 ? (
-            visibleMessages.map((msg, index) => (
-              <div key={index} className="message-bubble">
-                {msg}
+        {messages.length > 0 ? (
+          <>
+            <div className="messages-list">
+              {currentMessages.map((msg, index) => {
+                const messageIndex = (currentPage - 1) * messagesPerPage + index + 1;
+                return (
+                  <div key={index} className="message-bubble">
+                    <div className="message-avatar">{messageIndex}</div>
+                    <div className="message-content">{msg}</div>
+                  </div>
+                );
+              })}
+            </div>
+            
+            {totalPages > 1 && (
+              <div className="pagination-controls">
+                <button 
+                  className={`pagination-button ${currentPage === 1 ? 'disabled' : ''}`} 
+                  onClick={handlePrevPage}
+                  disabled={currentPage === 1}
+                  aria-label="Previous page"
+                >
+                  <ChevronLeft className="icon" />
+                  <span>Previous</span>
+                </button>
+                <div className="pagination-info">
+                  <span>{currentPage}</span> of <span>{totalPages}</span>
+                </div>
+                <button 
+                  className={`pagination-button ${currentPage === totalPages ? 'disabled' : ''}`} 
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages}
+                  aria-label="Next page"
+                >
+                  <span>Next</span>
+                  <ChevronRight className="icon" />
+                </button>
               </div>
-            ))
-          ) : (
-            <p className="no-messages">No messages yet</p>
-          )}
-        </div>
-
-        {messages.length > visibleMessages.length && (
-          <button className="show-more-button" onClick={handleShowMore}>
-            Show More
-          </button>
+            )}
+          </>
+        ) : (
+          <div className="empty-messages">
+            <div className="empty-icon-container">
+              <MessageSquare className="empty-icon" />
+            </div>
+            <h3 className="empty-title">No messages yet</h3>
+            <p className="empty-subtitle">Share your link to start receiving anonymous messages</p>
+          </div>
         )}
       </section>
     </div>
