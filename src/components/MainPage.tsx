@@ -130,9 +130,9 @@ const MainPage: React.FC = () => {
   const currentMessages = getCurrentPageMessages();
 
   return (
-    <div className="apple-container">
-      <header className="apple-header">
-        <h1 className="brand-name">ShhhDrop</h1>
+    <div>
+      <header >
+        <h1 >ShhhDrop</h1>
         <button onClick={handleSignOut} className="signout-button" aria-label="Sign out">
           <LogOut className="icon" />
           <span>Logout</span>

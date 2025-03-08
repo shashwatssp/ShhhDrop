@@ -1,568 +1,477 @@
-/* Apple-inspired MainPage.css */
-
-@import url("https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap");
-
+/* Base styles and variables */
 :root {
-  --apple-bg: #f5f5f7;
-  --apple-surface: #ffffff;
-  --apple-text: #1d1d1f;
-  --apple-secondary-text: #86868b;
-  --apple-blue: #0071e3;
-  --apple-blue-hover: #0077ed;
-  --apple-danger: #ff3b30;
-  --apple-border: #d2d2d7;
-  --apple-surface-hover: #f9f9fb;
-  --apple-message-bg: #ffffff;
-  --apple-gradient-start: #5e17eb;
-  --apple-gradient-end: #8a3ffc;
-  --apple-disabled: #e5e5ea;
-  --apple-disabled-text: #aeaeb2;
+  --primary-color: #6366f1;
+  --primary-hover: #4f46e5;
+  --secondary-color: #f3f4f6;
+  --text-color: #1f2937;
+  --text-light: #6b7280;
+  --success-color: #10b981;
+  --border-color: #e5e7eb;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --radius: 0.5rem;
+  --transition: all 0.2s ease;
+  --max-width: 800px;
+  --header-height: 70px; /* Added header height variable for consistency */
 }
 
+/* Global styles */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
-  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: var(--apple-bg);
-  color: var(--apple-text);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  color: var(--text-color);
+  background-color: #f9fafb;
   line-height: 1.5;
+  padding-top: calc(var(--header-height) + 20px); /* Use header height variable plus extra padding */
 }
 
-.apple-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.apple-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
+/* Header styles */
+header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
-  background-color: var(--apple-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  padding: 1rem 1.5rem;
+  background-color: white;
+  box-shadow: var(--shadow-md);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-height); /* Use the variable */
 }
 
-.brand-name {
-  font-size: 32px;
-  font-weight: 600;
-  letter-spacing: -0.5px;
-  background: linear-gradient(to right, var(--apple-gradient-start), var(--apple-gradient-end));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: rgb(247, 8, 8);
-  transition: transform 0.3s ease;
+header h1 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: 700;
 }
-
-.brand-name:hover {
-  transform: scale(1.02);
-}
-
 
 .signout-button {
-  background: none;
-  border: none;
-  color: var(--apple-blue);
-  cursor: pointer;
-  padding: 0.5rem;
-  font-size: 16px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: all 0.2s ease;
-  border-radius: 8px;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  transition: var(--transition);
 }
 
 .signout-button:hover {
-  background-color: rgba(0, 113, 227, 0.05);
+  background-color: var(--secondary-color);
+  color: var(--text-color);
 }
 
 .icon {
-  width: 18px;
-  height: 18px;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Main content container */
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* Section styles - specifically adjusted the share section */
+.share-section {
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: var(--max-width);
+  width: 90%;
+  position: relative; /* Added to ensure proper positioning */
+  margin-top: calc(var(--header-height) + 40rem); /* Increased margin at the top */
+  z-index: 1; /* Ensure it's properly layered */
+}
+
+.messages-section {
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: var(--max-width);
+  width: 90%;
 }
 
 .section-title {
   display: flex;
   align-items: center;
-  margin-bottom: 1.25rem;
-  font-weight: 500;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
   flex-wrap: wrap;
 }
 
 .section-title h2 {
-  font-size: 20px;
-  font-weight: 500;
-  margin-left: 0.75rem;
-  margin-right: 0.75rem;
-}
-
-.section-title .icon {
-  color: var(--apple-secondary-text);
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
 .section-subtitle {
-  color: var(--apple-secondary-text);
-  font-size: 14px;
-  margin-left: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin-left: auto;
 }
 
-.message-count {
-  margin-left: 0.5rem;
-  background-color: var(--apple-surface);
-  color: var(--apple-blue);
-  font-size: 14px;
-  font-weight: 500;
-  padding: 2px 8px;
-  border-radius: 10px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-.share-section {
-  position: sticky;
-  top: 80px;
-  z-index: 5;
-  background-color: var(--apple-surface);
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.share-section:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-}
-
+/* Link container styles */
 .link-container {
   display: flex;
-  background-color: var(--apple-bg);
-  border-radius: 12px;
+  align-items: center;
+  background-color: var(--secondary-color);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  gap: 0.75rem;
   overflow: hidden;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease;
-}
-
-.link-container:hover {
-  transform: translateY(-1px);
+  margin-bottom: 0.5rem;
 }
 
 .link-text {
   flex: 1;
-  padding: 1rem 1.25rem;
-  font-family: monospace;
-  font-size: 14px;
-  color: var(--apple-secondary-text);
+  font-size: 0.875rem;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   user-select: all;
 }
 
 .copy-button {
-  background-color: var(--apple-bg);
-  border: none;
-  border-left: 1px solid var(--apple-border);
-  color: var(--apple-blue);
-  font-weight: 500;
-  padding: 0 1.5rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  min-width: 85px;
   justify-content: center;
-  gap: 8px;
 }
 
 .copy-button:hover {
-  background-color: var(--apple-surface-hover);
+  background-color: var(--primary-hover);
 }
 
 .copy-button.copied {
-  color: #34c759;
-  background-color: rgba(52, 199, 89, 0.1);
+  background-color: var(--success-color);
 }
 
-.copy-text {
-  display: none;
-}
-
-@media (min-width: 480px) {
-  .copy-text {
-    display: inline;
-  }
-}
-
-.messages-section {
-  flex: 1;
-  background-color: var(--apple-surface);
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.messages-section:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+/* Messages section styles */
+.message-count {
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  margin-left: 0.5rem;
 }
 
 .messages-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
 .message-bubble {
   display: flex;
-  gap: 12px;
+  gap: 1rem;
   align-items: flex-start;
-  transition: all 0.3s ease;
-}
-
-.message-bubble:hover {
-  transform: translateY(-2px);
 }
 
 .message-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--apple-gradient-start), var(--apple-gradient-end));
-  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 500;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 9999px;
+  font-weight: 600;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(214, 184, 11, 0.3);
 }
 
 .message-content {
-  background-color: var(--apple-message-bg);
-  padding: 1rem 1.25rem;
-  border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  font-size: 15px;
-  line-height: 1.5;
+  background-color: var(--secondary-color);
+  padding: 1rem;
+  border-radius: var(--radius);
+  border-top-left-radius: 0;
   flex: 1;
-  border: 1px solid var(--apple-border);
-  transition: border-color 0.2s ease;
-}
-
-.message-bubble:hover .message-content {
-  border-color: #c7c7cc;
-}
-
-.empty-messages {
-  text-align: center;
-  color: var(--apple-secondary-text);
-  padding: 3rem 0;
-}
-
-.empty-icon-container {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--apple-gradient-start), var(--apple-gradient-end), #a56eff);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.5rem;
-  box-shadow: 0 4px 20px rgba(94, 23, 235, 0.2);
-}
-
-.empty-icon {
-  width: 28px;
-  height: 28px;
-  color: white;
-}
-
-.empty-title {
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--apple-text);
-  margin-bottom: 0.5rem;
-}
-
-.empty-subtitle {
-  font-size: 16px;
+  box-shadow: var(--shadow-sm);
 }
 
 /* Pagination controls */
 .pagination-controls {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 24px;
-  padding-top: 16px;
-  border-top: 1px solid var(--apple-border);
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  width: 100%;
 }
 
 .pagination-button {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background-color: var(--apple-bg);
-  border: none;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--apple-blue);
+  gap: 0.5rem;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition);
+  min-width: 100px;
+  justify-content: center;
+  height: 36px;
+  color: var(--primary-color);
 }
 
-.pagination-button:hover:not(.disabled) {
-  background-color: var(--apple-surface-hover);
-  transform: translateY(-1px);
+.pagination-button:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--primary-color);
 }
 
 .pagination-button.disabled {
-  background-color: var(--apple-disabled);
-  color: var(--apple-disabled-text);
+  opacity: 0.5;
   cursor: not-allowed;
+  color: var(--text-light);
+  border-color: var(--border-color);
 }
 
 .pagination-info {
-  font-size: 14px;
-  color: var(--apple-secondary-text);
+  font-size: 0.875rem;
+  color: var(--text-light);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  background-color: var(--secondary-color);
+  border-radius: var(--radius);
+}
+
+/* Empty state styles */
+.empty-messages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.empty-icon-container {
   display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  background-color: var(--secondary-color);
+  border-radius: 9999px;
+  margin-bottom: 1rem;
 }
 
-.pagination-info span:first-child {
+.empty-icon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--text-light);
+}
+
+.empty-title {
+  font-size: 1.25rem;
   font-weight: 600;
-  color: var(--apple-text);
+  margin-bottom: 0.5rem;
 }
 
-/* Loading spinner */
+.empty-subtitle {
+  color: var(--text-light);
+  max-width: 20rem;
+}
+
+/* Loading state */
 .loading-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   min-height: 100vh;
-  gap: 16px;
+  padding: 2rem;
 }
 
 .loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(0, 0, 0, 0.1);
-  border-top-color: var(--apple-blue);
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid var(--secondary-color);
+  border-top: 4px solid var(--primary-color);
   border-radius: 50%;
-  animation: spin 1s infinite cubic-bezier(0.42, 0, 0.58, 1);
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
 }
 
 .loading-text {
-  color: var(--apple-secondary-text);
-  font-size: 16px;
-  font-weight: 500;
+  color: var(--text-light);
+  font-size: 1rem;
 }
 
 @keyframes spin {
-  to {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
     transform: rotate(360deg);
   }
 }
 
-/* Animation for message bubbles */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.message-bubble {
-  animation: fadeIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-
-.message-bubble:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.message-bubble:nth-child(2) {
-  animation-delay: 0.15s;
-}
-.message-bubble:nth-child(3) {
-  animation-delay: 0.2s;
-}
-.message-bubble:nth-child(4) {
-  animation-delay: 0.25s;
-}
-.message-bubble:nth-child(5) {
-  animation-delay: 0.3s;
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --apple-bg: #000000;
-    --apple-surface: #1c1c1e;
-    --apple-text: #f5f5f7;
-    --apple-secondary-text: #86868b;
-    --apple-blue: #0a84ff;
-    --apple-blue-hover: #409cff;
-    --apple-border: #38383a;
-    --apple-surface-hover: #2c2c2e;
-    --apple-message-bg: #2c2c2e;
-    --apple-disabled: #2c2c2e;
-    --apple-disabled-text: #636366;
-  }
-
-  .loading-spinner {
-    border: 3px solid rgba(255, 255, 255, 0.1);
-    border-top-color: var(--apple-blue);
-  }
-
-  .share-section,
-  .messages-section {
-    background-color: #1c1c1e;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-
-  .message-content {
-    background-color: #2c2c2e;
-    border-color: #38383a;
-  }
-
-  .message-bubble:hover .message-content {
-    border-color: #48484a;
-  }
-
-  .copy-button.copied {
-    background-color: rgba(52, 199, 89, 0.15);
-  }
-
-  .pagination-button:hover:not(.disabled) {
-    background-color: #2c2c2e;
-  }
-}
-
-/* Media queries for responsiveness */
+/* Responsive styles */
 @media (max-width: 768px) {
-  .apple-container {
-    padding: 1.5rem;
-    gap: 16px;
+  :root {
+    --header-height: 60px; /* Smaller header on mobile */
+  }
+  
+  body {
+    padding-top: calc(var(--header-height) + 15px);
   }
 
-  .brand-name {
-    font-size: 26px;
-  }
-
-  .section-title h2 {
-    font-size: 18px;
+  header {
+    padding: 1rem;
   }
 
   .share-section,
   .messages-section {
+    width: 95%;
+    margin: 1.5rem auto;
     padding: 1.25rem;
+  }
+  
+  .share-section {
+    margin-top: calc(var(--header-height) + 15px); /* Adjust for mobile */
+  }
+
+  .section-title {
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    margin-left: 0;
+    width: 100%;
+    margin-top: 0.25rem;
+  }
+
+  .link-container {
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 1rem;
+  }
+
+  .copy-button {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .message-bubble {
+    gap: 0.75rem;
+  }
+
+  .message-avatar {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.875rem;
   }
 
   .pagination-controls {
-    flex-wrap: wrap;
+    padding: 0.75rem 0;
+  }
+
+  .pagination-button {
+    min-width: 40%;
+    padding: 0.5rem;
+  }
+  
+  .pagination-info {
+    padding: 0.25rem 0.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .apple-container {
-    padding: 1rem;
-    gap: 12px;
+  :root {
+    --header-height: 60px;
+  }
+  
+  body {
+    padding-top: var(--header-height);
+  }
+  
+  .share-section {
+    margin-top: calc(var(--header-height) + 10px);
+    padding: 1.25rem 1rem;
   }
 
-  .apple-header {
-    padding: 0.75rem 0;
+  .section-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
   }
 
-  .brand-name {
-    font-size: 24px;
+  .section-subtitle {
+    margin-top: 0.25rem;
   }
 
-  .link-text {
-    padding: 0.75rem 1rem;
-    font-size: 12px;
-  }
-
-  .copy-button {
-    padding: 0 1rem;
-  }
-
-  .message-content {
-    padding: 0.75rem 1rem;
-    font-size: 14px;
-  }
-
-  .share-section,
-  .messages-section {
-    padding: 1rem;
-  }
-
-  .pagination-button span {
-    display: none;
+  .pagination-controls {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
   }
 
   .pagination-button {
-    padding: 8px;
-  }
-}
-
-/* Safari-specific optimizations */
-@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-  .apple-header {
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    flex: 1;
+    min-width: 45%;
+    font-size: 0.75rem;
+    padding: 0.5rem 0.25rem;
   }
 
-  .link-container {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+  .pagination-info {
+    order: -1;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .copy-button {
+    padding: 0.5rem;
   }
 
   .message-content {
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    font-size: 0.875rem;
+    padding: 0.75rem;
+  }
+  
+  .copy-text, 
+  .pagination-button span {
+    display: inline-block;
+    font-size: 0.75rem;
+  }
+  
+  .icon {
+    width: 1rem;
+    height: 1rem;
   }
 }
-
-/* iOS touch feedback */
-@media (hover: none) {
-  .copy-button:active,
-  .signout-button:active,
-  .pagination-button:active:not(.disabled) {
-    opacity: 0.6;
-    transform: scale(0.98);
-  }
-
-  .message-bubble:active {
-    transform: scale(0.98);
-  }
-
-  .share-section:active,
-  .messages-section:active {
-    transform: scale(0.99);
-  }
-}
-
