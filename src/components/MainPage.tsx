@@ -173,8 +173,8 @@ const MainPage: React.FC = () => {
       <section id="messages-section" className="messages-section">
         <div className="section-title">
           <MessageSquare className="icon" />
-          <h2>Your Messages</h2>
-          <span className="message-count">{messages.length}</span>
+          <h2>DropBox<span className="message-count">{messages.length+" Messages"}</span></h2>
+          
         </div>
 
         {messages.length > 0 ? (

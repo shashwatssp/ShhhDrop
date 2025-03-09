@@ -11,8 +11,8 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --radius: 0.5rem;
   --transition: all 0.2s ease;
-  --max-width: 800px;
-  --header-height: 70px; /* Added header height variable for consistency */
+  --max-width: 90rem;
+  --header-height: 3rem; /* Added header height variable for consistency */
 }
 
 /* Global styles */
@@ -49,7 +49,9 @@ header {
 
 header h1 {
   color: var(--primary-color);
-  font-size: 1.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-size: 1.75rem;
   font-weight: 700;
 }
 
@@ -94,7 +96,7 @@ main {
   max-width: var(--max-width);
   width: 90%;
   position: relative; /* Added to ensure proper positioning */
-  margin-top: calc(var(--header-height) + 40rem); /* Increased margin at the top */
+  margin-top: calc(var(--header-height) + 20rem); /* Increased margin at the top */
   z-index: 1; /* Ensure it's properly layered */
 }
 
@@ -140,6 +142,7 @@ main {
 }
 
 .link-text {
+  margin-left: 1rem;
   flex: 1;
   font-size: 0.875rem;
   white-space: nowrap;
@@ -161,8 +164,8 @@ main {
   font-weight: 500;
   cursor: pointer;
   transition: var(--transition);
-  min-width: 85px;
-  justify-content: center;
+  min-width: 50px;
+  justify-content: left;
 }
 
 .copy-button:hover {
@@ -382,7 +385,7 @@ main {
   }
 
   .copy-button {
-    width: 100%;
+    width: 90%;
     justify-content: center;
     margin-top: 0.5rem;
   }
@@ -421,7 +424,7 @@ main {
   }
   
   .share-section {
-    margin-top: calc(var(--header-height) + 10px);
+    margin-top: calc(var(--header-height) + 50px);
     padding: 1.25rem 1rem;
   }
 
@@ -463,6 +466,17 @@ main {
     font-size: 0.875rem;
     padding: 0.75rem;
   }
+
+  /* Messages section styles */
+.message-count {
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  margin-left: 0.5rem;
+}
   
   .copy-text, 
   .pagination-button span {
