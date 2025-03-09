@@ -1,23 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { db } from "../firebaseConfig";
+import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 import "./MessagePage.css";
 
 const MessagePage: React.FC = () => {
   const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState<string[]>([]);
+  const [error, setError] = useState<string>("");
   const [showSuccess, setShowSuccess] = useState(false);
+  const { link } = useParams();
+  const navigate = useNavigate();
 
-  const handleSendMessage = () => {
-    if (message.trim() === "") return;
+  useEffect(() => {
+    const fetchMessages = async () => {
+      if (!link) return;
+      const q = query(collection(db, "users"), where("link", "==", link));
+      const querySnapshot = await getDocs(q);
 
-    // Simulate message sending
-    console.log("Message sent:", message);
+      if (querySnapshot.empty) {
+        setError("Invalid Link. Please check again.");
+        return;
+      }
 
-    // Show success message
+      querySnapshot.forEach(async (doc) => {
+        const userIdToken = doc.id;
+        const userMessagesSnapshot = await getDocs(collection(db, "users", userIdToken, "messages"));
+
+        const fetchedMessages: string[] = [];
+        userMessagesSnapshot.forEach((messageDoc) => {
+          fetchedMessages.push(messageDoc.data().text);
+        });
+
+        setMessages(fetchedMessages);
+        setError("");
+      });
+    };
+
+    fetchMessages();
+  }, [link]);
+
+  const handleSendMessage = async () => {
+    if (!link || message.trim() === "") return;
+
+    const q = query(collection(db, "users"), where("link", "==", link));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      setError("Invalid Link. Please check again.");
+      return;
+    }
+
+    querySnapshot.forEach(async (doc) => {
+      const userIdToken = doc.id;
+      await addDoc(collection(db, "users", userIdToken, "messages"), { text: message });
+      setMessage("");
+      setMessages((prev) => [...prev, message]);
+    });
+
     setShowSuccess(true);
 
-    // Clear input after sending
-    setMessage("");
-
-    // Hide success message after 3 seconds
     setTimeout(() => setShowSuccess(false), 3000);
   };
 
@@ -40,6 +82,7 @@ const MessagePage: React.FC = () => {
       </div>
 
       {showSuccess && <p className="success-message">✅ Message sent!</p>}
+      {error && <p className="error-message">❌ {error}</p>}
     </div>
   );
 };
