@@ -96,7 +96,7 @@ main {
   max-width: var(--max-width);
   width: 90%;
   position: relative; /* Added to ensure proper positioning */
-  margin-top: calc(var(--header-height) + 20rem); /* Increased margin at the top */
+  margin-top: calc(var(--header-height)); /* Increased margin at the top */
   z-index: 1; /* Ensure it's properly layered */
 }
 

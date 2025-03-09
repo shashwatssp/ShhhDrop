@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { auth, provider, signInWithPopup, db } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { LogIn } from "lucide-react";
+import { LogIn, Zap } from "lucide-react";
 import "./HomePage.css";
 
 // Function to generate a random 4-character UID
@@ -18,9 +18,11 @@ const generateShortUID = () => {
 const HomePage: React.FC = () => {
   const messages = 17;
   const navigate = useNavigate();
+  const [isSigningIn, setIsSigningIn] = useState(false);
 
   const handleGoogleSignIn = async () => {
     try {
+      setIsSigningIn(true);
       const result = await signInWithPopup(auth, provider);
       console.log("User signed in:", result.user);
 
@@ -43,19 +45,31 @@ const HomePage: React.FC = () => {
       }
     } catch (error) {
       console.error("Error during sign-in:", error);
+      setIsSigningIn(false);
     }
   };
 
   return (
-    <div className="home-container">
-      <div className="home-content">
-        <h1 className="brand-name">ShhhDrop</h1>
-        <p className="tagline">Drop Anonymous Messages Silently</p>
-        <button className="google-signin-btn" onClick={handleGoogleSignIn}>
-          <LogIn className="icon" />
-          <span>Continue with Google</span>
+    <div className="shhdrop-home-container">
+      <div className="shhdrop-home-content">
+        <h1 className="shhdrop-brand-name">ShhhDrop</h1>
+        <p className="shhdrop-tagline">Drop Anonymous Messages Silently</p>
+        
+        <button 
+          className="shhdrop-google-signin-btn" 
+          onClick={handleGoogleSignIn}
+          disabled={isSigningIn}
+        >
+          <LogIn className="shhdrop-icon" />
+          <span>{isSigningIn ? "Signing in..." : "Continue with Google"}</span>
         </button>
-        <p className="message-count">{messages} messages sent and counting...</p>
+        
+        <div className="shhdrop-quick-signin">
+          <Zap className="shhdrop-flash-icon" />
+          <span>Takes &lt;5 seconds</span>
+        </div>
+        
+        <p className="shhdrop-message-count">{messages} messages sent and counting...</p>
       </div>
     </div>
   );

@@ -31,68 +31,136 @@ body {
 }
 
 /* Home Page Container */
-.home-container {
+.shhdrop-home-container {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  padding: 2rem;
+  background: linear-gradient(135deg, #f0f4ff 0%, #e6eeff 100%);
+  padding: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 /* Centering Content */
-.home-content {
+.shhdrop-home-content {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 3rem 2.5rem;
   text-align: center;
-  background-color: var(--apple-surface);
-  padding: 3rem;
-  border-radius: var(--apple-radius);
-  box-shadow: var(--apple-shadow);
+  max-width: 28rem;
   width: 100%;
-  max-width: 420px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  animation: shhdropFadeIn 0.6s ease-out;
+  margin: 0 auto;
 }
 
 /* Title */
-.brand-name {
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--apple-text);
-  letter-spacing: -0.5px;
-  margin-bottom: 1rem;
+.shhdrop-brand-name {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #6366f1;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.025em;
+  position: relative;
+  display: inline-block;
+}
+
+
+.shhdrop-brand-name::after {
+  content: "";
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4rem;
+  height: 0.25rem;
+  background-color: #6366f1;
+  border-radius: 9999px;
 }
 
 /* Tagline */
-.tagline {
-  font-size: 1.125rem;
-  color: var(--apple-secondary-text);
-  margin-bottom: 2rem;
+.shhdrop-tagline {
+  font-size: 1.25rem;
+  color: #6b7280;
+  margin-bottom: 2.5rem;
+  font-weight: 500;
 }
-
 /* Google Sign-In Button */
-.google-signin-btn {
+.shhdrop-google-signin-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  background-color: var(--apple-blue);
+  gap: 0.75rem;
+  background-color: #6366f1;
   color: white;
-  padding: 1rem 2rem;
-  font-size: 1.125rem;
-  font-weight: 500;
   border: none;
-  border-radius: var(--apple-radius);
+  border-radius: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
   cursor: pointer;
-  width: 100%;
+  transition: all 0.2s ease;
+  width: 85%;
   transition: background-color 0.3s ease;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+  
 }
 
-.google-signin-btn:hover {
-  background-color: var(--apple-blue-hover);
+.shhdrop-google-signin-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transition: all 0.6s ease;
 }
 
-/* Message Count Text */
-.message-count {
-  font-size: 1rem;
-  color: var(--apple-secondary-text);
-  margin-top: 1.5rem;
+.shhdrop-google-signin-btn:hover {
+  background-color: #4f46e5;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3);
+}
+
+.shhdrop-google-signin-btn:hover::before {
+  left: 100%;
+}
+
+.shhdrop-google-signin-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.shhdrop-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.shhdrop-flash-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #fbbf24;
+  animation: shhdropFlash 1.5s infinite;
+}
+
+
+.shhdrop-message-count {
+  margin-top: 2.5rem;
+  font-size: 0.875rem;
+  color: #fdfdfd;
+  background-color: #0a9ee7;
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  font-weight: 900;
 }
 
 /* Responsive Design */

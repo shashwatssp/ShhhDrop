@@ -1,123 +1,259 @@
-/* Main container */
-.message-container {
+/* MessagePage.css - Scoped to message page components only */
+.shhdrop-message-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f0f4ff 0%, #e6eeff 100%);
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.shhdrop-message-container {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 32rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: shhdropSlideUp 0.5s ease-out forwards;
+}
+
+@keyframes shhdropSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.shhdrop-message-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.shhdrop-message-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #6366f1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.025em;
+}
+
+.shhdrop-message-subtitle {
+  font-size: 1.125rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.shhdrop-message-form {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
+}
+
+.shhdrop-textarea-wrapper {
+  position: relative;
+}
+
+.shhdrop-message-input {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  resize: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.shhdrop-message-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.shhdrop-character-count {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.75rem;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.shhdrop-button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.shhdrop-send-btn, 
+.shhdrop-try-btn {
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  background: #f4f6f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  min-height: 100vh;
-}
-
-h1 {
-  color: #333;
-  font-size: 2rem;
-  margin-bottom: 20px;
-  font-family: 'Roboto', sans-serif;
-  text-align: center;
-}
-
-.error-message {
-  color: red;
+  gap: 0.5rem;
+  padding: 0.875rem;
+  border-radius: 0.5rem;
   font-size: 1rem;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.messages-list {
-  width: 100%;
-  max-width: 600px;
-  margin-bottom: 20px;
-}
-
-.no-messages {
-  text-align: center;
-  font-size: 1rem;
-  color: #aaa;
-}
-
-.message-item {
-  background: #fff;
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  font-size: 1rem;
-  color: #333;
-}
-
-.message-input {
-  width: 100%;
-  max-width: 600px;
-  height: 150px;
-  padding: 12px;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  outline: none;
-  resize: none;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
-
-.message-input:focus {
-  border-color: #3f51b5;
-}
-
-.buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  width: 100%;
-  max-width: 600px;
-}
-
-.send-btn, .try-btn {
-  background: #3f51b5;
-  color: #fff;
-  padding: 10px 20px;
-  font-size: 1rem;
+  font-weight: 600;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
-  width: 100%;
-  max-width: 200px;
+  transition: all 0.2s ease;
 }
 
-.send-btn:hover, .try-btn:hover {
-  background: #303f9f;
+.shhdrop-send-btn {
+  background-color: #6366f1;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+  position: relative;
+  overflow: hidden;
 }
 
-.try-btn {
-  background: #f44336;
+.shhdrop-send-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  bottom: -50%;
+  left: -50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0));
+  transform: rotate(30deg) translate(-100%, 0);
+  animation: shhdropShine 3s infinite;
 }
 
-.try-btn:hover {
-  background: #e53935;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 600px) {
-  .message-container {
-      padding: 15px;
+@keyframes shhdropShine {
+  0% {
+    transform: rotate(30deg) translate(-100%, 0);
   }
-
-  h1 {
-      font-size: 1.5rem;
+  20% {
+    transform: rotate(30deg) translate(100%, 0);
   }
-
-  .message-input {
-      height: 120px;
+  100% {
+    transform: rotate(30deg) translate(100%, 0);
   }
+}
 
-  .send-btn, .try-btn {
-      font-size: 0.9rem;
+.shhdrop-send-btn:hover {
+  background-color: #4f46e5;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px -1px rgba(99, 102, 241, 0.3);
+}
+
+.shhdrop-send-btn:disabled {
+  background-color: #a5b4fc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.shhdrop-try-btn {
+  background-color: white;
+  color: #6366f1;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.shhdrop-try-btn:hover {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+  color: #4f46e5;
+}
+
+.shhdrop-success-message,
+.shhdrop-error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  animation: shhdropFadeIn 0.3s ease-out;
+}
+
+.shhdrop-success-message {
+  background-color: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.shhdrop-error-message {
+  background-color: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.shhdrop-success-icon,
+.shhdrop-error-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.shhdrop-success-icon {
+  background-color: #10b981;
+  color: white;
+}
+
+.shhdrop-error-icon {
+  background-color: #ef4444;
+  color: white;
+}
+
+@keyframes shhdropFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .shhdrop-message-container {
+    padding: 2rem 1.5rem;
+  }
+  
+  .shhdrop-message-title {
+    font-size: 2rem;
+  }
+  
+  .shhdrop-message-subtitle {
+    font-size: 1rem;
+  }
+  
+  .shhdrop-send-btn, 
+  .shhdrop-try-btn {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .shhdrop-message-page {
+    padding: 1rem;
+  }
+  
+  .shhdrop-message-container {
+    padding: 1.5rem 1.25rem;
+  }
+  
+  .shhdrop-message-title {
+    font-size: 1.75rem;
   }
 }
