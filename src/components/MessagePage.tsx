@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { db } from "../firebaseConfig";
 import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 import "./MessagePage.css";
@@ -10,7 +10,7 @@ const MessagePage: React.FC = () => {
   const [error, setError] = useState<string>("");
   const [showSuccess, setShowSuccess] = useState(false);
   const { link } = useParams();
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -31,6 +31,7 @@ const MessagePage: React.FC = () => {
         userMessagesSnapshot.forEach((messageDoc) => {
           fetchedMessages.push(messageDoc.data().text);
         });
+        messages
 
         setMessages(fetchedMessages);
         setError("");
