@@ -25,30 +25,48 @@ const MainPage: React.FC = () => {
         navigate("/");
         return;
       }
-
+  
       try {
         const userDoc = doc(db, "users", user.uid);
-        const userSnapshot = await getDoc(userDoc);
-
-        if (userSnapshot.exists()) {
-          const link = userSnapshot.data().link;
-          setUserLink(link);
-
-          const querySnapshot = await getDocs(collection(db, "users", user.uid, "messages"));
-          const fetchedMessages: string[] = querySnapshot.docs.map((doc) => doc.data().text);
-
-          setMessages(fetchedMessages);
-          setTotalPages(Math.ceil(fetchedMessages.length / messagesPerPage));
+        let userSnapshot = await getDoc(userDoc);
+  
+        // Retry logic for new users
+        let retryCount = 0;
+        const maxRetries = 5;
+  
+        while (!userSnapshot.exists() || !userSnapshot.data().link) {
+          if (retryCount >= maxRetries) {
+            console.error("Failed to retrieve link after multiple attempts.");
+            setLoading(false); // Prevent infinite loading
+            return;
+          }
+          await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait 1 second before retrying
+          userSnapshot = await getDoc(userDoc);
+          retryCount++;
         }
+  
+        const link = userSnapshot.data().link;
+        if (link) {
+          setUserLink(link);
+        }
+  
+        const querySnapshot = await getDocs(collection(db, "users", user.uid, "messages"));
+        const fetchedMessages: string[] = querySnapshot.docs.map((doc) => doc.data().text);
+  
+        setMessages(fetchedMessages);
+        setTotalPages(Math.ceil(fetchedMessages.length / messagesPerPage));
+        setLoading(false);
+        
       } catch (error) {
         console.error("Error fetching user data:", error);
-      } finally {
         setLoading(false);
       }
     });
-
+  
     return () => unsubscribe();
   }, [navigate]);
+  
+  
 
   // Get current page messages
   const getCurrentPageMessages = () => {
@@ -122,7 +140,7 @@ const MainPage: React.FC = () => {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
-        <p className="loading-text">Loading your messages...</p>
+        <p className="loading-text">Loading...</p>
       </div>
     );
   }

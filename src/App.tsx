@@ -34,7 +34,12 @@ const App: React.FC = () => {
   }, [userIdToken]);
 
   if (loading) {
-    return <div>Loading...</div>; // Optional loading UI
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p className="loading-text">Loading...</p>
+      </div>
+    );
   }
 
   return (
