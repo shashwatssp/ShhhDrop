@@ -11,11 +11,15 @@ const MainPage: React.FC = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [copying, setCopying] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [currentPageMessagesLength, setCurrentPageMessagesLength] = useState(0);
+  const [length, setLength] = useState(0);
+
   
   // Pagination state
   const messagesPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  
 
   const navigate = useNavigate();
 
@@ -65,6 +69,12 @@ const MainPage: React.FC = () => {
   
     return () => unsubscribe();
   }, [navigate]);
+
+  useEffect(() => {
+  const currentPageMessages = getCurrentPageMessages();
+  console.log(`Current page displays ${currentPageMessages.length} message(s)`);
+  setLength(currentPageMessages.length);
+}, [currentPage, messages]);
   
   
 
@@ -149,6 +159,7 @@ const MainPage: React.FC = () => {
 
   return (
     <div>
+      <div style={{ height: `${length === 0 ? 5 : (length >= 2 ? length * 4 : 0)}rem` }}></div>
       <header >
         <h1 >ShhhDrop</h1>
         <button onClick={handleSignOut} className="signout-button" aria-label="Sign out">
