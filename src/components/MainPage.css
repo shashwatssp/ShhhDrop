@@ -365,7 +365,7 @@ main {
   }
   
   .share-section {
-    margin-top: calc(var(--header-height) + 15px); /* Adjust for mobile */
+    margin-top: calc(var(--header-height)+5rem); /* Adjust for mobile */
   }
 
   .section-title {
@@ -404,10 +404,7 @@ main {
     padding: 0.75rem 0;
   }
 
-  .pagination-button {
-    min-width: 40%;
-    padding: 0.5rem;
-  }
+
   
   .pagination-info {
     padding: 0.25rem 0.5rem;
@@ -424,7 +421,7 @@ main {
   }
   
   .share-section {
-    margin-top: calc(var(--header-height) + 50px);
+    margin-top: calc(var(--header-height)+ 20rem);
     padding: 1.25rem 1rem;
   }
 
@@ -444,12 +441,7 @@ main {
     gap: 0.5rem;
   }
 
-  .pagination-button {
-    flex: 1;
-    min-width: 45%;
-    font-size: 0.75rem;
-    padding: 0.5rem 0.25rem;
-  }
+
 
   .pagination-info {
     order: -1;
