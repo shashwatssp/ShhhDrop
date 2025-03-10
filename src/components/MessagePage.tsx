@@ -4,6 +4,7 @@ import { db } from "../firebaseConfig";
 import { collection, addDoc, getDocs, query, where, doc, getDoc, increment, updateDoc } from "firebase/firestore";
 import { Send, MessageSquare } from "lucide-react";
 import "./MessagePage.css";
+import { encryptMessage } from '../utils/encryptionUtils';
 
 const MessagePage: React.FC = () => {
   const [message, setMessage] = useState("");
@@ -73,11 +74,13 @@ const MessagePage: React.FC = () => {
         setIsSending(false);
         return;
       }
-  
+      
+      const encryptedMessage = encryptMessage(message);
+
       for (const document of querySnapshot.docs) {
         const userIdToken = document.id;
         await addDoc(collection(db, "users", userIdToken, "messages"), {
-          text: message,
+          text: encryptedMessage,
         });
       }
   

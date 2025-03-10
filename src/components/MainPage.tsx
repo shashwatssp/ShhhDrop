@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { Copy, Share2, LogOut, MessageSquare, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { decryptMessage } from '../utils/encryptionUtils'; 
 import "./MainPage.css";
 
 const MainPage: React.FC = () => {
@@ -55,7 +56,10 @@ const MainPage: React.FC = () => {
         }
   
         const querySnapshot = await getDocs(collection(db, "users", user.uid, "messages"));
-        const fetchedMessages: string[] = querySnapshot.docs.map((doc) => doc.data().text);
+        const fetchedMessages: string[] = querySnapshot.docs.map((doc) => {
+          const encryptedText = doc.data().text;
+          return decryptMessage(encryptedText); 
+      })
   
         setMessages(fetchedMessages);
         setTotalPages(Math.ceil(fetchedMessages.length / messagesPerPage));
