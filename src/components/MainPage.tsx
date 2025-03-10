@@ -62,7 +62,7 @@ const MainPage: React.FC = () => {
       
   
       const querySnapshot = await getDocs(messagesQuery); 
-      
+
         const fetchedMessages: string[] = querySnapshot.docs.map((doc) => {
           const encryptedText = doc.data().text;
           return decryptMessage(encryptedText); 
@@ -85,7 +85,6 @@ const MainPage: React.FC = () => {
 
   useEffect(() => {
   const currentPageMessages = getCurrentPageMessages();
-  console.log(`Current page displays ${currentPageMessages.length} message(s)`);
   setLength(currentPageMessages.length);
 }, [currentPage, messages]);
   
@@ -163,7 +162,7 @@ const MainPage: React.FC = () => {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
-        <p className="loading-text">Loading...</p>
+        
       </div>
     );
   }
