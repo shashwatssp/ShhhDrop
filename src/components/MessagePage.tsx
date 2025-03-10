@@ -5,6 +5,7 @@ import { collection, addDoc, getDocs, query, where, doc, getDoc, increment, upda
 import { Send, MessageSquare } from "lucide-react";
 import "./MessagePage.css";
 import { encryptMessage } from '../utils/encryptionUtils';
+import { serverTimestamp } from "firebase/firestore";
 
 const MessagePage: React.FC = () => {
   const [message, setMessage] = useState("");
@@ -81,6 +82,7 @@ const MessagePage: React.FC = () => {
         const userIdToken = document.id;
         await addDoc(collection(db, "users", userIdToken, "messages"), {
           text: encryptedMessage,
+          timestamp: serverTimestamp(),
         });
       }
   

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
+import { query, orderBy } from "firebase/firestore";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { Copy, Share2, LogOut, MessageSquare, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
@@ -12,7 +13,6 @@ const MainPage: React.FC = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [copying, setCopying] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [currentPageMessagesLength, setCurrentPageMessagesLength] = useState(0);
   const [length, setLength] = useState(0);
 
   
@@ -54,11 +54,20 @@ const MainPage: React.FC = () => {
         if (link) {
           setUserLink(link);
         }
+
+        const messagesQuery = query(
+          collection(db, "users", user.uid, "messages"),
+          orderBy("timestamp", "desc") // ✅ Sort messages by newest to oldest
+      );
+      
   
-        const querySnapshot = await getDocs(collection(db, "users", user.uid, "messages"));
+      const querySnapshot = await getDocs(messagesQuery); 
+      
         const fetchedMessages: string[] = querySnapshot.docs.map((doc) => {
           const encryptedText = doc.data().text;
           return decryptMessage(encryptedText); 
+
+
       })
   
         setMessages(fetchedMessages);
