@@ -162,7 +162,7 @@ const MessagePage: React.FC = () => {
           {showSuccess && (
             <div className="shhdrop-success-message">
               <div className="shhdrop-success-icon">✓</div>
-              <p>Message Dropped successfully!!</p>
+              <p>Message Dropped Silently!!</p>
             </div>
           )}
 
