@@ -201,31 +201,45 @@
   }
   
   .shhdrop-text-btn {
-    background: transparent;
+    background: linear-gradient(135deg, #6bccec, #7fd98e); /* Vibrant gradient */
     border: none;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition-normal);
-    text-decoration: none;
-    padding: 0.5rem;
-  }
-  
-  .shhdrop-text-btn:hover {
-    color: var(--primary-color);
-    text-decoration: underline;
-  }
-  
-  .shhdrop-text-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  .shhdrop-text-btn-highlighted {
-    color: var(--primary-color);
+    color: #fff;  /* Crisp white text for better contrast */
+    font-size: 1rem;
     font-weight: 600;
-  }
+    border-radius: 6px;
+    padding: 0.6rem 1.5rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(16, 255, 167, 0.4); /* Soft glowing effect */
+}
+
+.shhdrop-text-btn:hover {
+    background: linear-gradient(135deg, #c10303, #620202); 
+    color: #fff; 
+    transform: translateY(-2px); 
+    text-decoration: none; 
+    box-shadow: 0 6px 20px rgba(255, 140, 75, 0.5);
+}
+
+.shhdrop-text-btn:active {
+    transform: translateY(0); 
+    background: #FF6B6B;
+}
+
+.shhdrop-text-btn:disabled {
+    opacity: 0.4;
+    background: #BDBDBD; 
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.shhdrop-text-btn-highlighted {
+    background: linear-gradient(135deg, #03eb58, #165401); 
+    color: #fff;
+    border-radius: 6px;
+}
+
   
   /* Messages */
   .shhdrop-error {
