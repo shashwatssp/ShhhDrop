@@ -4,6 +4,8 @@ import { auth } from "./firebaseConfig";
 import HomePage from "./components/HomePage";
 import MainPage from "./components/MainPage";
 import MessagePage from "./components/MessagePage";
+import AuthPage from "./components/AuthPage";
+import EmailVerificationPendingPage from "./components/EmailVerificationPendingPage";
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -37,7 +39,6 @@ const App: React.FC = () => {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
-        
       </div>
     );
   }
@@ -49,11 +50,17 @@ const App: React.FC = () => {
           path="/" 
           element={isAuthenticated ? <Navigate to="/main" /> : <HomePage />} 
         />
+        <Route path="/homepage" element={<HomePage />} />
+        <Route 
+          path="/email-signin" 
+          element={<AuthPage />} 
+        />
         <Route 
           path="/main" 
-          element={isAuthenticated ? <MainPage /> : <Navigate to="/" />} 
+          element={isAuthenticated ? <MainPage /> : <HomePage/>} 
         />
-        <Route path="/:link" element={<MessagePage/>} />
+      <Route path="/email-verification-pending" element={<EmailVerificationPendingPage />} />
+      <Route path="/:link" element={<MessagePage/>} />
       </Routes>
     </Router>
   );

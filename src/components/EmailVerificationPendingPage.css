@@ -1,0 +1,189 @@
+/* Base styles and animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  @keyframes blink {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+  }
+  
+  /* Container styles */
+  .verification-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1.5rem;
+    background-color: #f8fafc;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 20%),
+      radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 20%);
+  }
+  
+  .verification-card {
+    width: 100%;
+    max-width: 480px;
+    padding: 3rem 2rem;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: fadeIn 0.5s ease-out;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-image: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.05) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.05) 75%,
+      transparent 75%,
+      transparent
+    );
+    background-size: 240px 240px;
+  }
+  
+  /* Icon styles */
+  .verification-icon {
+    margin-bottom: 1.5rem;
+    animation: pulse 2s infinite ease-in-out;
+    color: #6366f1;
+  }
+  
+  /* Title styles */
+  .verification-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    background: linear-gradient(90deg, #6366f1, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Status styles */
+  .verification-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(245, 158, 11, 0.1);
+    border-radius: 0.5rem;
+    color: #f59e0b;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  
+  .status-icon {
+    animation: blink 1.5s infinite ease-in-out;
+  }
+  
+  /* Content styles */
+  .verification-content {
+    margin-bottom: 2rem;
+  }
+  
+  .verification-message {
+    font-size: 1.1rem;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  
+  .verification-instructions {
+    color: #64748b;
+    line-height: 1.6;
+  }
+  
+  .verification-instructions p {
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Button styles */
+  .verification-actions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .return-to-login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+  }
+  
+  .resend-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  }
+  
+  .resend-button:active {
+    transform: translateY(0);
+  }
+  
+  .back-button {
+    background: transparent;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.875rem 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+  }
+  
+  .back-button:hover {
+    background-color: rgba(99, 102, 241, 0.05);
+    color: #6366f1;
+    border-color: #6366f1;
+  }
+  
+  /* Mobile responsive adjustments */
+  @media (max-width: 480px) {
+    .verification-card {
+      padding: 2rem 1.5rem;
+    }
+    
+    .verification-title {
+      font-size: 1.5rem;
+    }
+    
+    .verification-icon svg {
+      width: 52px;
+      height: 52px;
+    }
+    
+    .verification-message {
+      font-size: 1rem;
+    }
+  }

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { auth, provider, signInWithPopup, db } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { LogIn, Zap } from "lucide-react";
+import { LogIn, Zap, Mail, Phone } from "lucide-react";
 import "./HomePage.css";
+import GoogleLogo from "../assets/google-logo.svg";
 
 // Function to generate a random 4-character UID
 const generateShortUID = () => {
@@ -19,7 +20,7 @@ const HomePage: React.FC = () => {
   const [messagesCount, setMessagesCount] = useState<number | null>(null);
   const [isSigningIn, setIsSigningIn] = useState(false);
   const navigate = useNavigate();
-
+  
   // Fetch the messages count from Firestore
   useEffect(() => {
     const fetchMessagesCount = async () => {
@@ -36,21 +37,21 @@ const HomePage: React.FC = () => {
         setMessagesCount(0);
       }
     };
-
+    
     fetchMessagesCount();
   }, []);
-
+  
   const handleGoogleSignIn = async () => {
     try {
       setIsSigningIn(true);
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-
+      
       if (!user) return;
-
+      
       const userRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userRef);
-
+      
       if (userDoc.exists()) {
         const existingLink = userDoc.data()?.link;
         if (existingLink) {
@@ -71,34 +72,43 @@ const HomePage: React.FC = () => {
     }
   };
 
+  const navigateToEmailSignIn = () => {
+    navigate('/email-signin');
+  };
+  
   if (messagesCount === null) {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
-        
       </div>
     );
   }
-
+  
   return (
     <div className="shhdrop-home-container">
       <div className="shhdrop-home-content">
         <h1 className="shhdrop-brand-name">ShhhDrop</h1>
         <p className="shhdrop-tagline">Drop Anonymous Messages Silently</p>
         
-        <button 
-          className="shhdrop-google-signin-btn" 
+        <button
+          className="shhdrop-google-signin-btn"
           onClick={handleGoogleSignIn}
           disabled={isSigningIn}
         >
-          <LogIn className="shhdrop-icon" />
+          <img src={GoogleLogo} alt="Google Logo" className="shhdrop-google-logo" />
           <span>{isSigningIn ? "Signing in..." : "Continue with Google"}</span>
         </button>
-        
         <div className="shhdrop-quick-signin">
           <Zap className="shhdrop-flash-icon" />
           <span>Takes &lt;5 seconds</span>
-        </div>
+        </div>        
+        <button
+          className="shhdrop-signin-btn shhdrop-email-btn"
+          onClick={navigateToEmailSignIn}
+        >
+          <Mail className="shhdrop-icon" />
+          <span>Continue with Email</span>
+        </button>
         
         <p className="shhdrop-message-count">
           {messagesCount} messages Dropped so far...

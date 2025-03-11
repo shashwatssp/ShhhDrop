@@ -30,18 +30,19 @@ const MainPage: React.FC = () => {
         navigate("/");
         return;
       }
-  
+
       try {
         const userDoc = doc(db, "users", user.uid);
         let userSnapshot = await getDoc(userDoc);
-  
+
         // Retry logic for new users
         let retryCount = 0;
-        const maxRetries = 5;
-  
+        const maxRetries = 3;
+
         while (!userSnapshot.exists() || !userSnapshot.data().link) {
           if (retryCount >= maxRetries) {
             console.error("Failed to retrieve link after multiple attempts.");
+            navigate("/email-verification-pending"); // Redirect here
             setLoading(false); // Prevent infinite loading
             return;
           }
@@ -49,7 +50,7 @@ const MainPage: React.FC = () => {
           userSnapshot = await getDoc(userDoc);
           retryCount++;
         }
-  
+
         const link = userSnapshot.data().link;
         if (link) {
           setUserLink(link);
@@ -57,31 +58,28 @@ const MainPage: React.FC = () => {
 
         const messagesQuery = query(
           collection(db, "users", user.uid, "messages"),
-          orderBy("timestamp", "desc") // ✅ Sort messages by newest to oldest
-      );
-      
-  
-      const querySnapshot = await getDocs(messagesQuery); 
+          orderBy("timestamp", "desc")
+        );
+
+        const querySnapshot = await getDocs(messagesQuery);
 
         const fetchedMessages: string[] = querySnapshot.docs.map((doc) => {
           const encryptedText = doc.data().text;
-          return decryptMessage(encryptedText); 
+          return decryptMessage(encryptedText);
+        });
 
-
-      })
-  
         setMessages(fetchedMessages);
         setTotalPages(Math.ceil(fetchedMessages.length / messagesPerPage));
         setLoading(false);
-        
       } catch (error) {
         console.error("Error fetching user data:", error);
         setLoading(false);
       }
     });
-  
+
     return () => unsubscribe();
-  }, [navigate]);
+}, [navigate]);
+
 
   useEffect(() => {
   const currentPageMessages = getCurrentPageMessages();
