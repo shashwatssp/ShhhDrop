@@ -59,7 +59,7 @@ const App: React.FC = () => {
           path="/main" 
           element={isAuthenticated ? <MainPage /> : <HomePage/>} 
         />
-      <Route path="/email-verification-pending" element={<EmailVerificationPendingPage />} />
+      <Route path="/email-verification-pending" element={<HomePage />} />
       <Route path="/:link" element={<MessagePage/>} />
       </Routes>
     </Router>
