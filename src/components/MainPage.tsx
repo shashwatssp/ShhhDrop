@@ -169,7 +169,11 @@ const MainPage: React.FC = () => {
 
   return (
     <div>
-      <div style={{ height: `${length === 0 ? 5 : (length >= 2 ? length * 4 : 0)}rem` }}></div>
+<div style={{ 
+  height: `${totalPages > 1 
+    ? (length === 0 ? 14 : (length >= 2 ? (length * 4) + 5 : 10)+3) 
+    : (length === 0 ? 20 : (length >= 2 ? (length * 4)+5 : 10)) -5}rem` 
+}}></div>
       <header >
         <h1 >ShhhDrop</h1>
         <button onClick={handleSignOut} className="signout-button" aria-label="Sign out">
@@ -181,7 +185,7 @@ const MainPage: React.FC = () => {
       <section className="share-section">
         <div className="section-title">
           <Share2 className="icon" />
-          <h2>Share Your Link</h2>
+          <h2>Share Your Link </h2>
           <span className="section-subtitle">Share this link to receive anonymous messages</span>
         </div>
 

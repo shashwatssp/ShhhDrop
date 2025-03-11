@@ -30,6 +30,19 @@ body {
   height: 100vh;
 }
 
+
+
+h1 {
+  font-size: 5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #6366f1, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.025em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 /* Home Page Container */
 .shhdrop-home-container {
   min-height: 100vh;
