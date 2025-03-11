@@ -354,7 +354,7 @@ const AuthPage: React.FC = () => {
               {authMode === AuthMode.SIGN_IN && (
                 <>
                   <button 
-                    className="shhdrop-text-btn"
+                    className="shhdrop-text-btn:forgot"
                     onClick={() => setAuthMode(AuthMode.FORGOT_PASSWORD)}
                   >
                     Forgot password?

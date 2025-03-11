@@ -214,6 +214,16 @@
     box-shadow: 0 4px 15px rgba(16, 255, 167, 0.4); /* Soft glowing effect */
 }
 
+.shhdrop-text-btn:forgot{
+    transform: translateY(0); 
+    background: #FF6B6B;
+}
+
+.shhdrop-text-btn:create {
+    transform: translateY(0); 
+    background: #388710;
+}
+
 .shhdrop-text-btn:hover {
     background: linear-gradient(135deg, #c10303, #620202); 
     color: #fff; 
@@ -235,8 +245,9 @@
 }
 
 .shhdrop-text-btn-highlighted {
-    background: linear-gradient(135deg, #03eb58, #165401); 
+    background: linear-gradient(135deg, #03eb58, #57e528); 
     color: #fff;
+    font-weight: 600;
     border-radius: 6px;
 }
 
