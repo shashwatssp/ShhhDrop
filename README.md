@@ -36,8 +36,6 @@ ShhhDrop is a secure, anonymous messaging platform that allows users to communic
 - **Anonymous Communication**: Exchange messages without revealing your identity
 - **Real-time Messaging**: Instant message delivery powered by Firebase
 - **Mobile-Optimized Interface**: Designed primarily for mobile users
-- **No Registration Required**: Start messaging immediately without creating an account
-- **Message Expiration**: Optional self-destructing messages for enhanced privacy
 
 ## Tech Stack
 
@@ -49,9 +47,6 @@ ShhhDrop is a secure, anonymous messaging platform that allows users to communic
 
 ## Installation and Setup
 
-### Prerequisites
-- Node.js (v14 or higher)
-- npm or yarn
 
 ### Local Development
 
@@ -66,10 +61,15 @@ cd ShhhDrop
 3. Create a `.env` file in the root directory with your Firebase configuration
 
 VITE_FIREBASE_API_KEY=your_api_key
+
 VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+
 VITE_FIREBASE_PROJECT_ID=your_project_id
+
 VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+
 VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+
 VITE_FIREBASE_APP_ID=your_app_id
 
 
@@ -86,18 +86,11 @@ The application is configured for easy deployment to Netlify. Simply connect you
 - Build command: `npm run build`
 - Publish directory: `dist`
 
-## How It Works
-
-1. Users create or join a secure chat room
-2. Messages are encrypted on the client-side before being sent to Firebase
-3. Only users with the correct decryption keys can read the messages
-4. No personal information is stored or required
 
 ## Security Considerations
 
 - All message content is encrypted using AES-256
 - No user tracking or logging of IP addresses
-- Messages can be set to expire after being read
 - No message content is stored on our servers in plain text
 
 ## Contributing
