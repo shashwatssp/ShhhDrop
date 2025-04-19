@@ -10,7 +10,7 @@ ShhhDrop is a secure, anonymous messaging platform that allows users to communic
 *Best viewed on mobile devices*
 
 ## Some Screenshots
-<img src="https://github.com/user-attachments/assets/dacd507d-44e5-475a-b39e-2e7ca4ccfed4" width="200" /> <img src="https://github.com/user-attachments/assets/42adb50f-d898-4e6a-9686-b255089b2495" width="200" /> <img src="https://github.com/user-attachments/assets/b91e49b9-17d3-4f8a-9456-4088bfe355a7" width="200" /> <img src="https://github.com/user-attachments/assets/0c40ee13-531e-49af-872d-b63fd79cbb40" width="200" /> <img src="https://github.com/user-attachments/assets/5db76635-c9fd-4f47-8973-939d8a621469" width="200" />
+<img src="https://github.com/user-attachments/assets/dacd507d-44e5-475a-b39e-2e7ca4ccfed4" width="400" /> <img src="https://github.com/user-attachments/assets/42adb50f-d898-4e6a-9686-b255089b2495" width="400" /> <img src="https://github.com/user-attachments/assets/b91e49b9-17d3-4f8a-9456-4088bfe355a7" width="400" /> <img src="https://github.com/user-attachments/assets/0c40ee13-531e-49af-872d-b63fd79cbb40" width="400" /> <img src="https://github.com/user-attachments/assets/5db76635-c9fd-4f47-8973-939d8a621469" width="400" />
 
 ## Features
 
